@@ -1,0 +1,42 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Project Overview
+
+This is a minimal static website project consisting of a single HTML file. The project is extremely simple with no build process, package management, or complex architecture.
+
+## Project Structure
+
+```
+oz-landing/
+└── index.html    # Main HTML file (contains minimal content)
+```
+
+## Development
+
+This is a static HTML project with no dependencies or build process:
+
+- **No package.json** - No npm/yarn dependencies
+- **No build process** - Direct HTML editing
+- **No tests** - Static HTML only
+- **No linting** - No JavaScript or CSS files present
+
+To work with this project:
+1. Edit `index.html` directly
+2. Open `index.html` in a web browser to preview changes
+
+## Current State
+
+The index.html file currently contains:
+- Basic HTML5 DOCTYPE declaration
+- A Korean comment: "팀장이 수정함" (Team leader modified)
+- No actual HTML structure or content yet
+
+## Notes
+
+This appears to be a landing page project in its very early stages. Future development will likely involve:
+- Adding proper HTML structure (head, body sections)
+- Including CSS for styling
+- Potentially adding JavaScript for interactivity
+- Setting up a proper development workflow if the project grows
