@@ -1,2 +1,631 @@
 <!DOCTYPE html>
-팀장이 수정함
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관계 관리 코치 - 인간관계를 더 스마트하게</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background 0.3s;
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary {
+            background: #007AFF;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature i {
+            font-size: 3rem;
+            color: #007AFF;
+            margin-bottom: 1rem;
+        }
+
+        .feature h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .feature p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .screenshots {
+            background: #f8f9fa;
+            padding: 4rem 2rem;
+        }
+
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .screenshot {
+            background: white;
+            border-radius: 15px;
+            padding: 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .screenshot img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .feedback {
+            background: #f8f9fa;
+        }
+
+        .feedback-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #007AFF;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: #007AFF;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #0056b3;
+        }
+
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .social-links {
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            transition: opacity 0.3s;
+        }
+
+        .social-links a:hover {
+            opacity: 0.8;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .modal h3 {
+            color: #007AFF;
+            margin-bottom: 1rem;
+        }
+
+        .modal p {
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+
+        .modal-btn {
+            background: #007AFF;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .modal-btn:hover {
+            background: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">관계 관리 코치</div>
+            <ul class="nav-links">
+                <li><a href="#features">기능</a></li>
+                <li><a href="#download">다운로드</a></li>
+                <li><a href="#feedback">피드백</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>관계 관리 코치</h1>
+            <p>스마트한 인간관계 관리를 위한 최고의 앱</p>
+            <p>연락처 관리, 대화 스타일 분석, 관계 점수까지 한 번에!</p>
+            <div class="cta-buttons">
+                <a href="#download" class="btn btn-primary">
+                    <i class="fas fa-download"></i> 앱 다운로드
+                </a>
+                <a href="#features" class="btn btn-secondary">
+                    <i class="fas fa-info-circle"></i> 자세히 보기
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="section">
+        <h2>주요 기능</h2>
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-users"></i>
+                <h3>스마트 연락처 관리</h3>
+                <p>설정한 기간을 넘어선 연락처를 자동으로 알려주어 중요한 관계를 놓치지 않도록 도와줍니다.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-comments"></i>
+                <h3>대화 스타일 분석</h3>
+                <p>메시지의 감정과 대화 스타일을 분석하여 더 나은 소통 방법을 제안합니다.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-chart-line"></i>
+                <h3>관계 점수 시스템</h3>
+                <p>각 연락처와의 관계를 점수로 평가하고 개선 방향을 제시합니다.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-bell"></i>
+                <h3>스마트 알림</h3>
+                <p>연락이 필요한 사람들을 적절한 시점에 알려주어 관계를 유지할 수 있도록 도와줍니다.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-shield-alt"></i>
+                <h3>개인정보 보호</h3>
+                <p>모든 데이터는 로컬에 저장되어 개인정보가 안전하게 보호됩니다.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>크로스 플랫폼</h3>
+                <p>iOS와 Android 모두에서 원활하게 작동하는 크로스 플랫폼 앱입니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="screenshots" class="screenshots">
+        <div class="section">
+            <h2>앱 스크린샷</h2>
+            <div class="screenshot-grid">
+                <div class="screenshot">
+                    <img src="https://via.placeholder.com/300x600/007AFF/FFFFFF?text=홈+화면" alt="홈 화면">
+                    <h3>홈 화면</h3>
+                    <p>연락이 필요한 사람들을 한눈에 확인</p>
+                </div>
+                <div class="screenshot">
+                    <img src="https://via.placeholder.com/300x600/34C759/FFFFFF?text=연락처" alt="연락처">
+                    <h3>연락처 관리</h3>
+                    <p>카테고리별 연락처 분류 및 검색</p>
+                </div>
+                <div class="screenshot">
+                    <img src="https://via.placeholder.com/300x600/FF9500/FFFFFF?text=메시지+분석" alt="메시지 분석">
+                    <h3>메시지 분석</h3>
+                    <p>대화 스타일과 감정 분석</p>
+                </div>
+                <div class="screenshot">
+                    <img src="https://via.placeholder.com/300x600/FF3B30/FFFFFF?text=관계+분석" alt="관계 분석">
+                    <h3>관계 분석</h3>
+                    <p>통화 패턴과 관계 점수 분석</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="download" class="section">
+        <h2>앱 다운로드</h2>
+        <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; color: #666;">
+                지금 바로 관계 관리 코치를 다운로드하고 더 나은 인간관계를 만들어보세요!
+            </p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary" onclick="downloadApp('google')">
+                    <i class="fab fa-google-play"></i> Google Play
+                </a>
+                <a href="#" class="btn btn-primary" onclick="downloadApp('apple')">
+                    <i class="fab fa-apple"></i> App Store
+                </a>
+            </div>
+            <p style="margin-top: 2rem; color: #666; font-size: 0.9rem;">
+                * 현재 개발 중인 앱입니다. 출시 예정일은 추후 공지됩니다.
+            </p>
+        </div>
+    </section>
+
+    <section id="feedback" class="feedback">
+        <div class="section">
+            <h2>사용자 피드백</h2>
+            <form class="feedback-form" id="feedbackForm">
+                <div class="form-group">
+                    <label for="name">이름 *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">이메일 *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">피드백 유형</label>
+                    <select id="category" name="category">
+                        <option value="suggestion">제안사항</option>
+                        <option value="bug">버그 신고</option>
+                        <option value="feature">기능 요청</option>
+                        <option value="general">일반 문의</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">메시지 *</label>
+                    <textarea id="message" name="message" placeholder="피드백을 자유롭게 작성해주세요..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> 피드백 보내기
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div>
+            <h3>관계 관리 코치</h3>
+            <p>더 나은 인간관계를 위한 스마트한 솔루션</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                © 2024 관계 관리 코치. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- 모달 -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h3 id="modalTitle">알림</h3>
+            <p id="modalMessage">메시지가 여기에 표시됩니다.</p>
+            <button class="modal-btn" onclick="closeModal()">확인</button>
+        </div>
+    </div>
+
+    <script>
+        // 부드러운 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 모달 관련 함수들
+        function showModal(title, message) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalMessage').textContent = message;
+            document.getElementById('modal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        // 모달 외부 클릭 시 닫기
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // 피드백 폼 제출
+        document.getElementById('feedbackForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const feedback = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                category: formData.get('category'),
+                message: formData.get('message')
+            };
+
+            try {
+                const response = await fetch('/api/feedback', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(feedback)
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    showModal('피드백 전송 완료', '피드백이 성공적으로 저장되었습니다! 감사합니다.');
+                    this.reset();
+                } else {
+                    showModal('오류', result.message || '피드백 전송 중 오류가 발생했습니다.');
+                }
+            } catch (error) {
+                console.error('피드백 전송 오류:', error);
+                showModal('오류', '서버 연결에 실패했습니다. 잠시 후 다시 시도해주세요.');
+            }
+        });
+
+        // 앱 다운로드 함수
+        function downloadApp(store) {
+            const storeName = store === 'google' ? 'Google Play' : 'App Store';
+            showModal('앱 다운로드', `${storeName}에서 앱을 다운로드할 수 있습니다. 현재 개발 중인 앱입니다. 출시 예정일은 추후 공지됩니다.`);
+        }
+
+        // 스크롤 시 헤더 스타일 변경
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(102, 126, 234, 0.95)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            }
+        });
+
+        // 페이지 로드 시 애니메이션
+        window.addEventListener('load', function() {
+            const features = document.querySelectorAll('.feature');
+            features.forEach((feature, index) => {
+                setTimeout(() => {
+                    feature.style.opacity = '0';
+                    feature.style.transform = 'translateY(20px)';
+                    feature.style.transition = 'opacity 0.6s, transform 0.6s';
+                    
+                    setTimeout(() => {
+                        feature.style.opacity = '1';
+                        feature.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 200);
+            });
+        });
+
+        // 저장된 피드백 확인 함수 (개발자용)
+        function viewFeedbacks() {
+            const feedbacks = JSON.parse(localStorage.getItem('feedback') || '[]');
+            console.log('저장된 피드백:', feedbacks);
+            showModal('피드백 목록', `총 ${feedbacks.length}개의 피드백이 저장되어 있습니다. 개발자 도구 콘솔에서 확인하세요.`);
+        }
+
+        // 개발자 도구에서 확인할 수 있도록 전역 함수로 노출
+        window.viewFeedbacks = viewFeedbacks;
+    </script>
+</body>
+</html> 
